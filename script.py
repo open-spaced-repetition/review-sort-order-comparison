@@ -455,7 +455,7 @@ def run_multi_process_simulation():
 
         plt.title(f"{plot_titles[i]} ({moving_average_win_size} days average)")
         plt.legend()
-        plt.savefig(f"{data_key}_comparison_{review_sorting_order}.png")
+        plt.savefig(f"{data_key}_comparison.png")
         plt.close()
 
     df = pd.DataFrame(
