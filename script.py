@@ -332,7 +332,7 @@ def run_simulation(seed, review_sorting_order):
             "total_remembered": total_remembered,
             "average_true_retention": average_true_retention,
         },
-        "retrievability": card[card["retrievability"] > 0]["retrievability"].tolist(),
+        "retrievability": card[card["retrievability"] > 0]["retrievability"].values,
     }
 
 
@@ -416,13 +416,12 @@ def run_multi_process_simulation():
 
     for review_sorting_order in review_sorting_orders:
         fig, ax = plt.subplots(figsize=(8, 6))
-        for r in all_results[review_sorting_order]["retrievability"]:
-            ax.hist(
-                r,
-                bins=20,
-                alpha=0.1,
-                color=cmap(review_sorting_orders.index(review_sorting_order)),
-            )
+        ax.hist(
+            all_results[review_sorting_order]["retrievability"],
+            bins=20,
+            alpha=0.5,
+            color=cmap(review_sorting_orders.index(review_sorting_order)),
+        )
         ax.set_xlim(0, 1)
         ax.set_title(f"Average Retrievability Distribution - {review_sorting_order}")
         fig.savefig(f"retrievability_distribution_{review_sorting_order}.png")
@@ -456,7 +455,7 @@ def run_multi_process_simulation():
 
         plt.title(f"{plot_titles[i]} ({moving_average_win_size} days average)")
         plt.legend()
-        plt.savefig(f"{data_key}_comparison.png")
+        plt.savefig(f"{data_key}_comparison_{review_sorting_order}.png")
         plt.close()
 
     df = pd.DataFrame(
