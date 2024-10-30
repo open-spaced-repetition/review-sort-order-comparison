@@ -4,8 +4,8 @@ import torch
 import random
 import matplotlib.pyplot as plt
 from matplotlib import colormaps
-from tqdm.auto import tqdm
-from fsrs_optimizer import (
+from tqdm.auto import tqdm  # type: ignore
+from fsrs_optimizer import (  # type: ignore
     lineToTensor,
     next_interval,
     power_forgetting_curve,
